@@ -21,12 +21,12 @@ public class User {
     private long Id;
 
     @NotBlank(message = "Username is mandatory")
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Invalid email")
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @NotBlank(message = "Password is mandatory")
@@ -34,6 +34,6 @@ public class User {
     private String password;
 
     @NotBlank(message = "Phone is mandatory")
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone", nullable = false, unique = true)
     private String phone;
 }

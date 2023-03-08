@@ -12,7 +12,7 @@ import com.pvp.eshop.model.User;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/users")
 public class UserController {
     UserService userService;
 
@@ -20,12 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
         if (userService.existsUser(id)) {
             return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
@@ -34,12 +34,12 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") long id, @Valid @RequestBody User user) {
         if (userService.existsUser(id)) {
             return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.OK);
@@ -48,7 +48,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         if (userService.existsUser(id)) {
             userService.deleteUser(id);
@@ -58,10 +58,16 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users/login")
+    @GetMapping("/login")
     public ResponseEntity<Boolean> checkPassword(@RequestBody User user) {
         if(userService.userByUsername(user.getUsername())!=null) {
-            return new ResponseEntity<>(userService.comparePasswords(user.getUsername(),user.getPassword()), HttpStatus.OK);
+            boolean check = userService.comparePasswords(user.getUsername(),user.getPassword());
+            if (check) {
+                return new ResponseEntity<>(userService.comparePasswords(user.getUsername(),user.getPassword()), HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(userService.comparePasswords(user.getUsername(),user.getPassword()), HttpStatus.UNAUTHORIZED);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

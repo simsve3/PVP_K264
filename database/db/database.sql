@@ -11,4 +11,4 @@ CREATE TABLE users
 );
 
 INSERT INTO users (id,username,email,password,phone)
-VALUES(1,'admin','admin@gmail.com','admin123','+37067777777');
+VALUES(1,'admin','admin@gmail.com','bf6b5bdb74c79ece9fc0ad0ac9fb0359f9555d4f35a83b2e6ec69ae99e09603d','+37067777777');

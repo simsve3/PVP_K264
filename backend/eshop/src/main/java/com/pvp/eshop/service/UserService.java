@@ -26,7 +26,7 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public User createUser(User user){
+    public User createUser(User user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
@@ -49,7 +49,7 @@ public class UserService {
         return userRepository.userByUsername(username);
     }
 
-    public User updateUser(Long id, User user){
+    public User updateUser(Long id, User user) {
         User userFromDb = userRepository.findById(id).get();
         userFromDb.setUsername(user.getUsername());
         userFromDb.setEmail(user.getEmail());
@@ -83,7 +83,7 @@ public class UserService {
         return hexString.toString();
     }
 
-    public boolean comparePasswords(String username, String password){
+    public boolean comparePasswords(String username, String password) {
         String hash="";
         try {
             hash = toHexString(getSHA(username + ":" + password));

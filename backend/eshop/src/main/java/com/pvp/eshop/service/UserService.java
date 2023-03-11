@@ -1,21 +1,21 @@
 package com.pvp.eshop.service;
 
-import com.pvp.eshop.model.User;
-import com.pvp.eshop.repository.UserRepository;
-import org.springframework.stereotype.Service;
-
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import com.pvp.eshop.model.User;
+import com.pvp.eshop.repository.UserRepository;
+import org.springframework.stereotype.Service;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
-        this.userRepository=userRepository;
+        this.userRepository = userRepository;
     }
 
     public List<User> getAllUsers() {
@@ -30,11 +30,10 @@ public class UserService {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
-        String hash="";
+        String hash = "";
         try {
             hash = toHexString(getSHA(user.getUsername() + ":" + user.getPassword()));
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);
         }
         newUser.setPassword(hash);
@@ -53,11 +52,10 @@ public class UserService {
         User userFromDb = userRepository.findById(id).get();
         userFromDb.setUsername(user.getUsername());
         userFromDb.setEmail(user.getEmail());
-        String hash="";
+        String hash = "";
         try {
             hash = toHexString(getSHA(user.getUsername() + ":" + user.getPassword()));
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);
         }
         userFromDb.setPassword(hash);
@@ -68,8 +66,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
-    {
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         return md.digest(input.getBytes(StandardCharsets.UTF_8));
     }
@@ -84,14 +81,13 @@ public class UserService {
     }
 
     public boolean comparePasswords(String username, String password) {
-        String hash="";
+        String hash = "";
         try {
             hash = toHexString(getSHA(username + ":" + password));
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);
         }
-        User userFromDb=userByUsername(username);
+        User userFromDb = userByUsername(username);
         return hash.equals(userFromDb.getPassword());
     }
 }

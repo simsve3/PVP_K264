@@ -2,13 +2,20 @@ package com.pvp.eshop.controller;
 
 import java.util.List;
 
+import com.pvp.eshop.model.User;
 import com.pvp.eshop.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import com.pvp.eshop.model.User;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
@@ -60,13 +67,14 @@ public class UserController {
 
     @GetMapping("/login")
     public ResponseEntity<Boolean> checkPassword(@RequestBody User user) {
-        if(userService.userByUsername(user.getUsername())!=null) {
-            boolean check = userService.comparePasswords(user.getUsername(),user.getPassword());
+        if (userService.userByUsername(user.getUsername()) != null) {
+            boolean check = userService.comparePasswords(user.getUsername(), user.getPassword());
             if (check) {
-                return new ResponseEntity<>(userService.comparePasswords(user.getUsername(),user.getPassword()), HttpStatus.OK);
-            }
-            else {
-                return new ResponseEntity<>(userService.comparePasswords(user.getUsername(),user.getPassword()), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(userService.comparePasswords(user.getUsername(),
+                        user.getPassword()), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(userService.comparePasswords(user.getUsername(),
+                        user.getPassword()), HttpStatus.UNAUTHORIZED);
             }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

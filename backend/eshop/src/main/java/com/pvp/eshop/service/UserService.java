@@ -10,6 +10,7 @@ import com.pvp.eshop.model.User;
 import com.pvp.eshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -21,7 +22,6 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
     public User getUserById(long id) {
         return userRepository.findById(id).get();
     }
@@ -38,6 +38,7 @@ public class UserService {
         }
         newUser.setPassword(hash);
         newUser.setPhone(user.getPhone());
+        newUser.setProducts(user.getProducts());
         return userRepository.save(newUser);
     }
 
@@ -52,6 +53,7 @@ public class UserService {
         User userFromDb = userRepository.findById(id).get();
         userFromDb.setUsername(user.getUsername());
         userFromDb.setEmail(user.getEmail());
+        userFromDb.setProducts(user.getProducts());
         String hash = "";
         try {
             hash = toHexString(getSHA(user.getUsername() + ":" + user.getPassword()));

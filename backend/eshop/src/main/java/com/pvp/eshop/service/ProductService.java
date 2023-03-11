@@ -1,17 +1,18 @@
 package com.pvp.eshop.service;
 
+import java.util.List;
+
 import com.pvp.eshop.model.Product;
 import com.pvp.eshop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
-        this.productRepository=productRepository;
+        this.productRepository = productRepository;
     }
 
     public List<Product> getAllProducts() {
@@ -27,6 +28,7 @@ public class ProductService {
         newProduct.setName(product.getName());
         newProduct.setDescription(product.getDescription());
         newProduct.setPrice(product.getPrice());
+        newProduct.setCreated_by(product.getCreated_by());
         return productRepository.save(newProduct);
     }
 
@@ -39,6 +41,7 @@ public class ProductService {
         productFromDb.setName(product.getName());
         productFromDb.setDescription(product.getDescription());
         productFromDb.setPrice(product.getPrice());
+        productFromDb.setCreated_by(product.getCreated_by());
         return productRepository.save(productFromDb);
     }
     public void deleteProduct(Long id) {

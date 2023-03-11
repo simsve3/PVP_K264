@@ -18,10 +18,9 @@ apply it. Then to add local configuration file open `File>Settings>Tools>Checkst
 and press `+` under the `Configuration file` section.
 Press browse and select `checkstyle.xml` file and write a short description,
 click `Next`, `Finish` and enable it in the `Active` column. Restart IDE.
-Shortcut `ctrl+alt+L` could help with formatting.
 Over the `Configuration file` section you can enable `Treat Checkstyle errors as warnings`.
 
 ### Visual Studio Code:
 To add Checkstyle, go to `Extensions` and install `Checkstyle for Java` plugin.
 To add local configuration right click on `checkstyle.xml` file and click
-`Set the Checkstyle Configuration File`.
+`Set the Checkstyle Configuration File`. In `.vscode->settings.json` add `"java.checkstyle.version": "8.43"`.

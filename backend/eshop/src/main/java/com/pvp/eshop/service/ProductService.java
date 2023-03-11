@@ -28,7 +28,7 @@ public class ProductService {
         newProduct.setName(product.getName());
         newProduct.setDescription(product.getDescription());
         newProduct.setPrice(product.getPrice());
-        newProduct.setCreated_by(product.getCreated_by());
+        newProduct.setUser_id(product.getUser_id());
         return productRepository.save(newProduct);
     }
 
@@ -41,7 +41,7 @@ public class ProductService {
         productFromDb.setName(product.getName());
         productFromDb.setDescription(product.getDescription());
         productFromDb.setPrice(product.getPrice());
-        productFromDb.setCreated_by(product.getCreated_by());
+        productFromDb.setUser_id(product.getUser_id());
         return productRepository.save(productFromDb);
     }
     public void deleteProduct(Long id) {

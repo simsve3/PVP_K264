@@ -13,6 +13,8 @@ CREATE TABLE users
 
 INSERT INTO users (id,username,email,password,phone)
 VALUES(1,'admin','admin@gmail.com','bf6b5bdb74c79ece9fc0ad0ac9fb0359f9555d4f35a83b2e6ec69ae99e09603d','+37067777777');
+INSERT INTO users (id,username,email,password,phone)
+VALUES(2,'user','user@gmail.com','bf6b5bdb74c79ece9fc0ad0ac9fb0359f9555d4f35a83b2e6ec69ae99e09603d','+37067111177');
 
 CREATE TABLE products
 (
@@ -28,3 +30,7 @@ CREATE TABLE products
 
 INSERT INTO products (id,name,description,price,user_id)
 VALUES(1,'telefonas','naudotas',150,1);
+INSERT INTO products (id,name,description,price,user_id)
+VALUES(2,'kompiuteris','naujas',1000,1);
+INSERT INTO products (id,name,description,price,user_id)
+VALUES(3,'vaizdo plokste','pusiau nauja',800,2);

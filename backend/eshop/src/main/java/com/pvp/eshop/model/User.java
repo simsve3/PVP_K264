@@ -49,7 +49,7 @@ public class User {
     private String phone;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "created_by")
+    @JoinColumn(name = "user_id")
     private List<Product> products = new ArrayList<>();
 
 }

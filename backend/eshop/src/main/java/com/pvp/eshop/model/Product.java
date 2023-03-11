@@ -37,6 +37,6 @@ public class Product {
     @Column(name = "price", nullable = false)
     private float price;
 
-    @Column(name = "created_by")
-    private long created_by;
+    @Column(name = "user_id")
+    private long user_id;
 }
